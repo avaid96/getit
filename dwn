@@ -1,4 +1,4 @@
-#!/bin/bash
+#   !/bin/bash
 # My downloader script
 
 echo "Beginning process..."
@@ -14,12 +14,12 @@ echo "You entered: $FOLDER"
 
 trap '{ echo "Hey, you pressed Ctrl-C :(" ; exit 1; }' INT
 
-echo "Grabbing youtube-dl"
-command -v youtube-dl >/dev/null 2>&1 || sudo apt install youtube-dl
+#echo "Grabbing youtube-dl"
+#command -v youtube-dl >/dev/null 2>&1 || sudo apt install youtube-dl
 
-echo "Cleaning your links.txt list: i.e. removing all duplicated and non-links"
-pip install --upgrade validators
-python remDup.py
+#echo "Cleaning your links.txt list: i.e. removing all duplicated and non-links"
+#pip install --upgrade validators
+#python remDup.py
 
 echo "Downloading music in links.txt to new folder $FOLDER in the current directory $PWD"
 
@@ -32,9 +32,11 @@ while read p; do
 		SAVENAME=${SAVENAME//-/ }
 		SAVENAME=${SAVENAME//// > }
 		echo $SAVENAME
-		youtube-dl --extract-audio --audio-format mp3 -o "YTDL/$FOLDER/$SAVENAME.%(ext)s" $p --no-cache-dir
+		youtube-dl --extract-audio --audio-format mp3 -o "/Users/avaid96/Desktop/Dev/music/getit/YTDL/$FOLDER/$SAVENAME.%(ext)s" $p --no-cache-dir
 		unset SAVENAME
 	else
-		youtube-dl --extract-audio --audio-format mp3 -o "YTDL/$FOLDER/%(title)s.%(ext)s" $p --no-cache-dir
+		youtube-dl --extract-audio --audio-format mp3 -o "/Users/avaid96/Desktop/Dev/music/getit/YTDL/$FOLDER/%(title)s.%(ext)s" $p --no-cache-dir
 	fi
-done < links.txt
+done < /Users/avaid96/Desktop/Dev/music/getit/links.txt
+
+# > links.txt
